@@ -1,22 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as TodoSvg } from "../assets/newJeansLogo.svg";
-import HeaderJpg from "../assets/header.jpg";
+import Header from "../components/Header";
+import ProfileImage from "../assets/baseline_account_circle_black_48dp.png";
 import uuid from "react-uuid";
 
 // 1. styled-components를 만들었습니다.
 const StAll = styled.div`
   background-color: #333;
 `;
-const StHeader = styled.header`
-  width: 100%;
-  height: 500px;
-  background: url(${HeaderJpg}) no-repeat;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+
 const StMain = styled.div`
   width: 600px;
   margin: 0 auto;
@@ -44,16 +36,25 @@ const StBtn = styled.button`
 `;
 const StMember = styled.form`
   width: 100%;
-  height: 200px;
+  height: 210px;
   margin: 0 auto;
   border-radius: 10px;
   background-color: #fff;
   background-image: url(${(props) => props.backgroundImage});
+  display: block;
+`;
+const StProfileImg = styled.img`
+  width: 70px;
+  float: left;
+  margin-top: 5px;
+  margin-left: 5px;
 `;
 const StInputWrap = styled.div`
   width: 500px;
   height: 80px;
   margin: 0 auto;
+  float: right;
+  margin: 10px;
 `;
 const StSpan = styled.span`
   float: left;
@@ -64,7 +65,12 @@ const StInput = styled.input`
   height: 50px;
   display: block;
 `;
-const StButton = styled.button``;
+const StInputBtn = styled.button`
+  float: right;
+  margin-top: 10px;
+  margin-right: 25px;
+`;
+
 const StLetterBox = styled.div`
   width: 600px;
   height: 200px;
@@ -99,9 +105,7 @@ function Home() {
   };
   return (
     <StAll>
-      <StHeader>
-        <TodoSvg />
-      </StHeader>
+      <Header />
       <StMain>
         <StWrap>
           {memberArr.map((member) => {
@@ -133,6 +137,7 @@ function Home() {
               setContent("");
             }}
           >
+            <StProfileImg src={ProfileImage} />
             <StInputWrap>
               <StSpan>닉네임 : </StSpan>
               <StInput
@@ -150,8 +155,8 @@ function Home() {
                   setContent(e.target.value);
                 }}
               ></StInput>
+              <StInputBtn type="submit">입력</StInputBtn>
             </StInputWrap>
-            <StButton type="submit">입력</StButton>
           </StMember>
         </div>
         <StLetterBox>
