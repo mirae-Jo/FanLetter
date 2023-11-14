@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import uuid from "react-uuid";
 import LetterInputBox from "./LetterInputBox";
 import MemberBtn from "./MemberBtn";
+import LetterBoxPre from "./LetterBoxPre";
 
 // 배열
 
-const Letters = [{ id: uuid(), nicknames: "혜인화이팅", contents: "혜인체고" }];
 const Dummys = [
   {
     createdAt: "2023-11-03T02:07:09.423Z",
@@ -68,13 +67,13 @@ const memberArr = [
 ];
 
 function Main() {
-  const [letters, setLetter] = useState(Dummys);
+  const [letters, setLetters] = useState(Dummys);
   const [selectedMemberId, setSelectedMemberId] = useState(memberArr[0].id);
 
   const MemberInputHandler = (memberId) => {
     setSelectedMemberId(memberId);
   };
-
+  console.log(letters);
   return (
     <div>
       <StMain>
@@ -82,26 +81,16 @@ function Main() {
           selectedMemberId={selectedMemberId}
           MemberInputHandler={MemberInputHandler}
         />
-        <LetterInputBox setLetter={setLetter} letter={letters} />
-        <StLetterBox>
-          {letters
-            .filter((mem) => {
-              return (
-                mem.writedTo ===
-                memberArr.find((member) => {
-                  return member.id === selectedMemberId;
-                }).name
-              );
-            })
-            .map((letter) => {
-              return (
-                <div key={letter.id}>
-                  <StH3>{letter.nickname}</StH3>
-                  <p>{letter.content}</p>
-                </div>
-              );
-            })}
-        </StLetterBox>
+        <LetterInputBox
+          setLetters={setLetters}
+          letters={letters}
+          memberArr={memberArr}
+        />
+        <LetterBoxPre
+          letters={letters}
+          selectedMemberId={selectedMemberId}
+          memberArr={memberArr}
+        />
       </StMain>
     </div>
   );
@@ -111,16 +100,6 @@ function Main() {
 const StMain = styled.div`
   width: 600px;
   margin: 0 auto;
-`;
-
-const StLetterBox = styled.div`
-  width: 580px;
-  height: 200px;
-  margin: 40px auto;
-  background-color: #eee;
-`;
-const StH3 = styled.h3`
-  font-weight: bold;
 `;
 
 export default Main;

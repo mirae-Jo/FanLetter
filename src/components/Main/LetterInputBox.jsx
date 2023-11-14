@@ -3,17 +3,27 @@ import ProfileImage from "../../assets/baseline_account_circle_black_48dp.png";
 import uuid from "react-uuid";
 import styled from "styled-components";
 
-function LetterInputBox({ setLetter, letter }) {
+function LetterInputBox({ setLetters, letters, memberArr }) {
   const [nickname, setNickname] = useState("");
   const [content, setContent] = useState("");
+  const [selected, setSelected] = useState(memberArr[0].name);
+  const [profile, setProfile] = useState(ProfileImage);
+
+  const handleSelect = (e) => {
+    setSelected(e.target.value);
+  };
+
   const Formprops = (e) => {
     e.preventDefault();
     const newLetter = {
+      avatar: profile,
       id: uuid(),
-      nicknames: nickname,
-      contents: content,
+      writedTo: selected,
+      nickname: nickname,
+      content: content,
     };
-    setLetter([...letter, newLetter]);
+    setLetters([...letters, newLetter]);
+
     setNickname("");
     setContent("");
   };
@@ -23,16 +33,18 @@ function LetterInputBox({ setLetter, letter }) {
       <StMember onSubmit={Formprops}>
         <StCenterWrap>
           <StProfileImg src={ProfileImage} />
-          <div>
-            <span>누구에게 보내실건가요?</span>
-            <select>
-              <option>혜인</option>
-              <option>하니</option>
-              <option>다니엘</option>
-              <option>해린</option>
-              <option>민지</option>
+          <StOptionWrap>
+            <StSendWho>누구에게 보내실건가요?</StSendWho>
+            <select onChange={handleSelect}>
+              {memberArr.map((member) => {
+                return (
+                  <option key={member.id} value={member.name}>
+                    {member.name}
+                  </option>
+                );
+              })}
             </select>
-          </div>
+          </StOptionWrap>
           <StInputWrap>
             <StSpan>닉네임 : </StSpan>
             <StInput
@@ -70,7 +82,7 @@ const StMember = styled.form`
 `;
 const StCenterWrap = styled.div`
   width: 540px;
-  height: 165px;
+  height: auto;
   margin: 10px auto;
 `;
 const StProfileImg = styled.img`
@@ -78,11 +90,20 @@ const StProfileImg = styled.img`
   float: left;
   margin-top: 8px;
 `;
+const StOptionWrap = styled.div`
+  width: 450px;
+  height: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
+  float: left;
+`;
+const StSendWho = styled.span`
+  margin-right: 10px;
+`;
 const StInputWrap = styled.div`
   width: 450px;
-  margin: 0 auto;
   float: left;
-  margin-top: 15px;
+  margin-top: 10px;
   margin-left: 20px;
 `;
 const StSpan = styled.span`
