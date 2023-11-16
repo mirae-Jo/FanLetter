@@ -1,15 +1,6 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 
-const memberArr = [
-  { id: 1, name: "혜인" },
-  { id: 2, name: "하니" },
-  { id: 3, name: "다니엘" },
-  { id: 4, name: "해린" },
-  { id: 5, name: "민지" },
-];
-
-function MemberBtn({ selectedMemberId, MemberInputHandler }) {
+function MemberBtn({ selectedMemberId, MemberInputHandler, memberArr }) {
   return (
     <div>
       <StWrap>

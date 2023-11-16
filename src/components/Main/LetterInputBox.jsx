@@ -7,7 +7,7 @@ function LetterInputBox({ setLetters, letters, memberArr }) {
   const [nickname, setNickname] = useState("");
   const [content, setContent] = useState("");
   const [selected, setSelected] = useState(memberArr[0].name);
-  const [profile, setProfile] = useState(ProfileImage);
+  const [profile] = useState(ProfileImage);
 
   const handleSelect = (e) => {
     setSelected(e.target.value);
@@ -52,6 +52,7 @@ function LetterInputBox({ setLetters, letters, memberArr }) {
               onChange={(e) => {
                 setNickname(e.target.value);
               }}
+              required
             ></StInput>
           </StInputWrap>
           <StInputWrap>
@@ -61,6 +62,7 @@ function LetterInputBox({ setLetters, letters, memberArr }) {
               onChange={(e) => {
                 setContent(e.target.value);
               }}
+              required
             ></StTextarea>
             <StInputBtn type="submit">입력</StInputBtn>
           </StInputWrap>
