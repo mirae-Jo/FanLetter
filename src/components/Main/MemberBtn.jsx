@@ -36,7 +36,7 @@ const StBtn = styled.button`
   background-color: ${(props) => (props.selected ? "aqua" : "transparent")};
   color: ${(props) => (props.selected ? "navy" : "aqua")};
   font-weight: 900;
-  font-size: 1rem;
+  font-size: 1.2rem;
   &:hover {
     cursor: pointer;
     background-color: aqua;

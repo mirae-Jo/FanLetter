@@ -8,11 +8,11 @@ const StAll = styled.div`
   background-color: #333;
 `;
 
-function Home({ letters, setLetters }) {
+function Home() {
   return (
     <StAll>
       <Header />
-      <Main letters={letters} setLetters={setLetters} />
+      <Main />
       <Footer />
     </StAll>
   );

@@ -7,19 +7,22 @@ function LetterBoxPre({ letters, selectedMemberId, memberArr }) {
   const goToHandler = (letter) => {
     navigate(`/detail/${letter.id}`);
   };
+  const filtered = letters.filter((mem) => {
+    return (
+      mem.writedTo ===
+      memberArr.find((member) => {
+        return member.id === selectedMemberId;
+      }).name
+    );
+  });
+  console.log(filtered.length);
   return (
     <div>
       <StLetterBox>
-        {letters
-          .filter((mem) => {
-            return (
-              mem.writedTo ===
-              memberArr.find((member) => {
-                return member.id === selectedMemberId;
-              }).name
-            );
-          })
-          .map((letter) => {
+        {filtered.length === 0 ? (
+          <StNoLetterBox>등록된 편지가 없습니다</StNoLetterBox>
+        ) : (
+          filtered.map((letter) => {
             return (
               <StLetterWrap
                 key={letter.id}
@@ -34,16 +37,26 @@ function LetterBoxPre({ letters, selectedMemberId, memberArr }) {
                 </StLetterDiv>
               </StLetterWrap>
             );
-          })}
+          })
+        )}
       </StLetterBox>
     </div>
   );
 }
+
 const StLetterBox = styled.div`
   width: 580px;
   height: auto;
+  min-height: 145px;
   margin: 40px auto;
   border: 2px solid #fff;
+`;
+const StNoLetterBox = styled.h1`
+  text-align: center;
+  color: #fff;
+  font-size: 1.5rem;
+  height: 140px;
+  line-height: 140px;
 `;
 const StLetterWrap = styled.div`
   width: 540px;

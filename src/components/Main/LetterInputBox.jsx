@@ -124,7 +124,7 @@ const StTextarea = styled.textarea`
 const StInputBtn = styled.button`
   float: right;
   margin-top: 10px;
-  margin-right: 22px;
+  margin-right: 30px;
 `;
 
 export default LetterInputBox;

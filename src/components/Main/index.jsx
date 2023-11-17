@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import LetterInputBox from "./LetterInputBox";
 import MemberBtn from "./MemberBtn";
 import LetterBoxPre from "./LetterBoxPre";
+import { MainContext } from "../../context/MainContext";
 
 // 배열
 
@@ -14,7 +15,8 @@ const memberArr = [
   { id: 5, name: "민지" },
 ];
 
-function Main({ letters, setLetters }) {
+function Main() {
+  const data = useContext(MainContext);
   const [selectedMemberId, setSelectedMemberId] = useState(memberArr[0].id);
 
   const MemberInputHandler = (memberId) => {
@@ -29,13 +31,13 @@ function Main({ letters, setLetters }) {
           memberArr={memberArr}
         />
         <LetterInputBox
-          setLetters={setLetters}
-          letters={letters}
+          setLetters={data.setLetters}
+          letters={data.letters}
           memberArr={memberArr}
         />
         <LetterBoxPre
-          letters={letters}
-          setLetters={setLetters}
+          letters={data.letters}
+          setLetters={data.setLetters}
           selectedMemberId={selectedMemberId}
           memberArr={memberArr}
         />
