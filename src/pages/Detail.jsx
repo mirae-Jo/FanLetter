@@ -6,6 +6,7 @@ import { MainContext } from "../context/MainContext";
 
 function Detail() {
   const data = useContext(MainContext);
+
   const navigate = useNavigate();
   const params = useParams();
   const foundData = data.letters.find((item) => {
