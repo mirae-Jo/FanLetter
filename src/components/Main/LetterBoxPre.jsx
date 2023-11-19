@@ -1,8 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function LetterBoxPre({ letters, selectedMemberId, memberArr }) {
+function LetterBoxPre({ selectedMemberId, memberArr }) {
+  const letters = useSelector((store) => store.letterReducer.letters);
+
   const navigate = useNavigate();
   const goToHandler = (letter) => {
     navigate(`/detail/${letter.id}`);

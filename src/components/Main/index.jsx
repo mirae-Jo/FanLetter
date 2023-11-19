@@ -16,7 +16,6 @@ const memberArr = [
 ];
 
 function Main() {
-  const data = useContext(MainContext);
   const [selectedMemberId, setSelectedMemberId] = useState(memberArr[0].id);
 
   const MemberInputHandler = (memberId) => {
@@ -30,14 +29,8 @@ function Main() {
           MemberInputHandler={MemberInputHandler}
           memberArr={memberArr}
         />
-        <LetterInputBox
-          setLetters={data.setLetters}
-          letters={data.letters}
-          memberArr={memberArr}
-        />
+        <LetterInputBox memberArr={memberArr} />
         <LetterBoxPre
-          letters={data.letters}
-          setLetters={data.setLetters}
           selectedMemberId={selectedMemberId}
           memberArr={memberArr}
         />

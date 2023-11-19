@@ -4,18 +4,22 @@ import Home from "../pages/Home";
 import Detail from "../pages/Detail";
 import { data } from "./data";
 import { MainContext } from "../context/MainContext";
+import { Provider } from "react-redux";
+import store from "../redux/config/configStore";
 
 function Router() {
   const [letters, setLetters] = useState(data);
   return (
-    <MainContext.Provider value={{ letters, setLetters }}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/detail/:id" element={<Detail />} />
-        </Routes>
-      </BrowserRouter>
-    </MainContext.Provider>
+    <Provider store={store}>
+      <MainContext.Provider value={{ letters, setLetters }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/detail/:id" element={<Detail />} />
+          </Routes>
+        </BrowserRouter>
+      </MainContext.Provider>
+    </Provider>
   );
 }
 

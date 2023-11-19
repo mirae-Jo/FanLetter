@@ -1,23 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ProfileImage from "../assets/baseline_account_circle_black_48dp.png";
 import { useNavigate, useParams } from "react-router-dom";
-import { MainContext } from "../context/MainContext";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteLetter, updateLetter } from "../redux/modules/letterReducer";
 
 function Detail() {
-  const data = useContext(MainContext);
-
   const navigate = useNavigate();
   const params = useParams();
-  const foundData = data.letters.find((item) => {
-    return item.id === params.id;
-  });
+
+  const letters = useSelector((store) => store.letterReducer.letters);
+  const foundData = letters.find((letter) => letter.id === params.id);
+
+  const dispatch = useDispatch();
+
   const delBtn = () => {
     if (window.confirm("삭제하시겠습니까?")) {
-      const deleteLetter = data.letters.filter((item) => {
-        return item.id !== params.id;
-      });
-      data.setLetters(deleteLetter);
+      dispatch(deleteLetter(params.id));
       navigate("/");
       alert("삭제되었습니다");
     } else {
@@ -31,17 +30,15 @@ function Detail() {
     setIsLetterUpdate(true);
   };
   const completeBtn = () => {
-    const updateLetter = {
+    const updatedLetter = {
       avatar: foundData.avatar,
       id: foundData.id,
       nickname: nickname,
       content: content,
       writedTo: foundData.writedTo,
     };
-    const changeLetter = data.letters.map((letter) => {
-      return letter.id === updateLetter.id ? updateLetter : letter;
-    });
-    data.setLetters(changeLetter);
+
+    dispatch(updateLetter(updatedLetter));
     setIsLetterUpdate(false);
   };
 

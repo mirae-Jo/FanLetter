@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import ProfileImage from "../../assets/baseline_account_circle_black_48dp.png";
 import uuid from "react-uuid";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { addLetter } from "../../redux/modules/letterReducer";
 
-function LetterInputBox({ setLetters, letters, memberArr }) {
+function LetterInputBox({ memberArr }) {
+  const letters = useSelector((store) => store.letterReducer.letters);
+  const dispatch = useDispatch();
   const [nickname, setNickname] = useState("");
   const [content, setContent] = useState("");
   const [selected, setSelected] = useState(memberArr[0].name);
@@ -22,7 +26,7 @@ function LetterInputBox({ setLetters, letters, memberArr }) {
       nickname: nickname,
       content: content,
     };
-    setLetters([...letters, newLetter]);
+    dispatch(addLetter(newLetter));
 
     setNickname("");
     setContent("");
