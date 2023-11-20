@@ -1,4 +1,4 @@
-# Fan Letter Website to New Jeans
+# Fan Letter Website for New Jeans
 
 ## branch
 
